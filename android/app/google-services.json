@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "101700050440",
+    "project_id": "bookcycle-c6800",
+    "storage_bucket": "bookcycle-c6800.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101700050440:android:fbc64514844e3fe4943bbd",
+        "android_client_info": {
+          "package_name": "com.example.bookcycle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101700050440-vhj8p0ljak8q1t30s7c0knam7ph47vug.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookcycle",
+            "certificate_hash": "6c3832d64ba8a1cb5316301b5f511e0a2ae6405b"
+          }
+        },
+        {
+          "client_id": "101700050440-1ffaf8s0nqh3hdpf1ccc3t2a40mjd3u1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTtHMt8EVwuQr2ud58mBjs4ap4ZsxaCFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101700050440-1ffaf8s0nqh3hdpf1ccc3t2a40mjd3u1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "101700050440-pg9ebroo5khskt7a0k1s9nqrg7d27oi8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bookcycle"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
