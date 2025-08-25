@@ -121,7 +121,7 @@ class _SellPageScreenState extends State<SellPageScreen> {
               child: Form(
                 key: _formkey,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 70),
                   child: SingleChildScrollView(
 
                     keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

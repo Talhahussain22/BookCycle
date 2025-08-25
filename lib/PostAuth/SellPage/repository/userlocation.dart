@@ -7,7 +7,6 @@ import 'package:geocoding/geocoding.dart' as geocoding;
 class UserLocation {
   Position? _currentPosition;
 
-  // Handle location permission
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -35,7 +34,6 @@ class UserLocation {
     return true;
   }
 
-  // Get current GPS position
   Future<void> _getCurrentPosition() async {
     final hasPermission = await _handleLocationPermission();
     if (!hasPermission) return;
@@ -52,7 +50,6 @@ class UserLocation {
   dynamic lat;
   dynamic lon;
 
-  // Get address from lat/lng using OpenStreetMap Nominatim
   Future<dynamic> getAddressFromLatLng() async {
     await _getCurrentPosition();
     if (_currentPosition == null) return null;
@@ -60,21 +57,24 @@ class UserLocation {
     lat = _currentPosition!.latitude;
     lon = _currentPosition!.longitude;
 
-
     try {
       final url = Uri.parse(
         "https://nominatim.openstreetmap.org/reverse?format=json&lat=$lat&lon=$lon&zoom=18&addressdetails=1",
       );
 
-      final response = await http.get(url, headers: {
-        'User-Agent': 'BookCycleApp/1.0 (th47555@gmail.com)', // Required by Nominatim
-      });
+      final response = await http.get(
+        url,
+        headers: {
+          'User-Agent':
+              'BookCycleApp/1.0 (th47555@gmail.com)', // Required by Nominatim
+        },
+      );
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
 
         if (data["address"]["neighbourhood"] != null) {
-          return [data["address"]["neighbourhood"],lat,lon];
+          return [data["address"]["neighbourhood"], lat, lon];
         }
       }
     } catch (e) {
@@ -82,18 +82,18 @@ class UserLocation {
     }
     try {
       final placemarks = await geocoding.placemarkFromCoordinates(lat, lon);
-      if(placemarks==null) return null;
+      if (placemarks == null) return null;
       final place = placemarks.first;
-      if(place==null) return null;
+      if (place == null) return null;
 
-      return ['${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}',lat,lon];
+      return [
+        '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}',
+        lat,
+        lon,
+      ];
     } catch (e) {
       debugPrint("Google reverse geocoding failed: $e");
     }
-
-
-
-
 
     return null;
   }

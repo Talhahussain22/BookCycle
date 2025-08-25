@@ -1,4 +1,3 @@
-import 'package:bookcycle/PostAuth/CartPage/screen/cartpage_screen.dart';
 import 'package:bookcycle/PostAuth/ChatPage/screen/chat_page_screen.dart';
 import 'package:bookcycle/PostAuth/Homepage/screen/Homepage.dart';
 import 'package:bookcycle/PostAuth/MyBooksPage/screen/my_books_page.dart';
@@ -34,11 +33,8 @@ class _DashboardState extends State<Dashboard> {
         appBar: AppBar(
           title: Text('BookCycle',style: TextStyle(color: Color(0xFFD65A31),fontFamily: 'Gravitas'),),
           backgroundColor: Color(0xFFEEEEEE),
-          actions: [
-            IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPageScreen()));
-            },icon:Icon(Icons.add_shopping_cart), color: Color(0xFFD65A31)),
-          ],
+
+
         ),
         backgroundColor: Color(0xFFEEEEEE),
         body: pages[selectedIndex],

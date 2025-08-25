@@ -16,15 +16,17 @@ class CustomTextField extends StatelessWidget {
   double verticalpadding;
   VoidCallback? onTap;
   Function(String)? onchanged;
+  FocusNode? focusNode;
 
 
 
-  CustomTextField({super.key,this.onTap,required this.hintext,required this.controller,required this.validator,this.maxlinex=1,this.isreadOnly=false,required this.color,required this.borderColor,required this.hintextcolor,required this.textColor,this.borderRadius=15,this.horizontalpadding=15,this.verticalpadding=15,this.generalboderColor,this.onchanged});
+  CustomTextField({super.key,this.onTap,required this.hintext,required this.controller,required this.validator,this.maxlinex=1,this.isreadOnly=false,required this.color,required this.borderColor,required this.hintextcolor,required this.textColor,this.borderRadius=15,this.horizontalpadding=15,this.verticalpadding=15,this.generalboderColor,this.onchanged,this.focusNode});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      focusNode: focusNode,
       validator: validator,
       maxLines: maxlinex,
       readOnly: isreadOnly,

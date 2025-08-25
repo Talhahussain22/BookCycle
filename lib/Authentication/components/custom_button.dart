@@ -7,7 +7,8 @@ class CustomButton extends StatelessWidget {
   double? height;
   double? width;
   double borderRadius;
-  CustomButton({super.key,required this.buttoncolor,required this.onTap,required this.child,this.height=50,this.width=double.maxFinite,this.borderRadius=15});
+  Color? bordercolor;
+  CustomButton({super.key,required this.buttoncolor,required this.onTap,required this.child,this.height=50,this.width=double.maxFinite,this.borderRadius=15,this.bordercolor});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
+          border: Border.all(color: bordercolor??Colors.transparent),
           color: buttoncolor
         ),
         child: child,

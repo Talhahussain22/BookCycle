@@ -71,9 +71,9 @@ class GeneralScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'share your books with other!',
+                  'share your books with others!',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white,fontFamily: 'Pacifico',fontSize: 12),
                 ),
                 const SizedBox(height: 100),
                 Padding(

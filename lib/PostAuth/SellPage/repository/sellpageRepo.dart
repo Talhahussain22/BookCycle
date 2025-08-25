@@ -39,7 +39,7 @@ class SellPageRepo{
             {
               throw 'unable to Upload \nCheck your internet connection';
             }
-
+          List<String> searchkeywords=title.split(' ');
           await firebaseFirestore.collection('books').doc(bookid).set({
             'bookid':bookid,
             'ownerid':ownerid,
@@ -54,8 +54,9 @@ class SellPageRepo{
             'latitude':lat,
             'longitude':lon,
             'status':'Available',
-            'createdAt':createdAt
-
+            'createdAt':createdAt,
+            'searchkeyword':searchkeywords,
+            'views':0,
           });
 
         }on FirebaseException catch(e){

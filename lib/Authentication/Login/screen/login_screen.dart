@@ -1,4 +1,5 @@
 import 'package:bookcycle/Authentication/Login/bloc/login_bloc.dart';
+import 'package:bookcycle/Authentication/ResetPasswordPage/screen/resetPassword.dart';
 import 'package:bookcycle/PostAuth/Dashboard.dart';
 import 'package:bookcycle/ProfileScreen/screen/profile_screen.dart';
 import 'package:bookcycle/Authentication/components/custom_button.dart';
@@ -7,6 +8,7 @@ import 'package:bookcycle/Authentication/google_auth/bloc/google_auth_bloc.dart'
 import 'package:bookcycle/PostAuth/Homepage/screen/Homepage.dart';
 import 'package:bookcycle/consts/validator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -34,6 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF222831),
+        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(CupertinoIcons.back)),
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: BlocConsumer<LoginBloc, LoginState>(
@@ -46,15 +49,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     await _firestore.collection('users').doc(state.uid).get();
 
                 if (!res.exists) {
-                  Navigator.pushReplacement(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => ProfileScreen()),
+                      (Route<dynamic> route)=>false,
                   );
                 } else {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => Homepage()),
-                  );
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Dashboard()), (Route<dynamic> route)=>false);
                 }
               } catch (e) {
                 print(e.toString());
@@ -98,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Text(
                             'Sign in',
-                            style: TextStyle(fontSize: 35, color: Colors.white),
+                            style: TextStyle(fontSize: 35, color: Colors.white,fontFamily: 'Abel'),
                           ),
                           const SizedBox(height: 80),
                           Padding(
@@ -124,6 +125,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               hintextcolor: Colors.white54,
                               textColor: Colors.white,
                             ),
+                          ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              GestureDetector(onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetPasswordPage()));},child: Text('Forgot Password?',style: TextStyle(color: Color(0xFFD65A31,),fontWeight: FontWeight.bold,fontSize: 12,decoration: TextDecoration.underline,decorationColor: Colors.white),)),
+                              const SizedBox(width: 20,)
+                            ],
                           ),
 
                           SizedBox(height: 20),

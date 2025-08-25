@@ -3,6 +3,8 @@ import 'package:bookcycle/PostAuth/BookDetailPage/chatpage/Model/chatModel.dart'
 import 'package:bookcycle/PostAuth/BookDetailPage/chatpage/Model/messageModel.dart';
 import 'package:bookcycle/PostAuth/BookDetailPage/chatpage/repository/chatrepo.dart';
 import 'package:bookcycle/consts/validator.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -70,13 +72,15 @@ class _ChatPageState extends State<ChatPage> {
         title: Row(children: [
           IconButton(
               onPressed: () {
+                ScaffoldMessenger.of(context).clearSnackBars();
                 Navigator.pop(context);
+
               },
               icon: const Icon(CupertinoIcons.back, color: Colors.black)),
           const SizedBox(width: 5),
           CircleAvatar(
             radius: 20,
-            backgroundImage: NetworkImage(personimage),
+            backgroundImage: CachedNetworkImageProvider(personimage),
             onBackgroundImageError: (_, __) {},
           ),
           const SizedBox(width: 10),
@@ -116,12 +120,12 @@ class _ChatPageState extends State<ChatPage> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            bookimage,
+                          child: CachedNetworkImage(
+                            imageUrl: bookimage,
                             width: 50,
                             height: 50,
                             fit: BoxFit.fill,
-                            errorBuilder: (context, _, __) => Container(
+                            errorWidget: (context, _, __) => Container(
                               width: 50,
                               height: 50,
                               decoration: BoxDecoration(
@@ -179,36 +183,43 @@ class _ChatPageState extends State<ChatPage> {
                           ConstrainedBox(
                             constraints:
                             const BoxConstraints(minWidth: 0, maxWidth: 300),
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 8),
-                              decoration: BoxDecoration(
-                                color: msg.senderId == currentUserId
-                                    ? Colors.blue[200]
-                                    : Colors.grey[300],
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Flexible(child: Text(msg.text)),
-                                  const SizedBox(width: 7),
-                                  if (msg.timestamp != null)
-                                    Text(
-                                      DateFormat.jm()
-                                          .format(msg.timestamp!.toDate()),
-                                      style: TextStyle(
-                                          fontSize: 8,
-                                          color: Colors.grey.shade700),
-                                    ),
-                                  if (msg.senderId == currentUserId) ...[
-                                    const SizedBox(width: 4),
-                                    Icon(statusIcon,
-                                        size: 14, color: Colors.black54),
+                            child: GestureDetector(
+                              onLongPress:(){
+                              FlutterClipboard.copy(msg.text);
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(milliseconds: 500),content: Center(child: Text('Copied to clipboard',style: TextStyle(fontFamily: 'Abel'),))));
+
+                      },
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 8),
+                                decoration: BoxDecoration(
+                                  color: msg.senderId == currentUserId
+                                      ? Colors.blue[200]
+                                      : Colors.grey[300],
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Flexible(child: Text(msg.text)),
+                                    const SizedBox(width: 7),
+                                    if (msg.timestamp != null)
+                                      Text(
+                                        DateFormat.jm()
+                                            .format(msg.timestamp!.toDate()),
+                                        style: TextStyle(
+                                            fontSize: 8,
+                                            color: Colors.grey.shade700),
+                                      ),
+                                    if (msg.senderId == currentUserId) ...[
+                                      const SizedBox(width: 4),
+                                      Icon(statusIcon,
+                                          size: 14, color: Colors.black54),
+                                    ],
                                   ],
-                                ],
+                                ),
                               ),
                             ),
                           ),

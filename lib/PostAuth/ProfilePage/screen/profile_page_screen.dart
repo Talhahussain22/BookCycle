@@ -1,5 +1,6 @@
 import 'package:bookcycle/PostAuth/ProfilePage/bloc/profile_page_bloc.dart';
 import 'package:bookcycle/PostAuth/ProfilePage/repository.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -34,10 +35,10 @@ class _ProfilePageScreenState extends State<ProfilePageScreen> {
         return Center(
           child: Column(
             children: [
-              const SizedBox(height: 50,),
+              const SizedBox(height: 100,),
               CircleAvatar(
                 radius: 80,
-                backgroundImage: data!=null? NetworkImage('${url}${data!['imagepath']}') :null,
+                backgroundImage: data!=null? CachedNetworkImageProvider('${url}${data!['imagepath']}') :null,
 
               ),
               const SizedBox(height: 10),

@@ -6,6 +6,7 @@ import 'package:bookcycle/Authentication/components/custom_textfield.dart';
 import 'package:bookcycle/Authentication/google_auth/bloc/google_auth_bloc.dart';
 import 'package:bookcycle/Authentication/google_auth/repository/google_auth.dart';
 import 'package:bookcycle/consts/validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -36,14 +37,16 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF222831),
+        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(CupertinoIcons.back,color: Colors.white,)),
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: BlocConsumer<SignupBloc, SignupState>(
         listener: (context, state) {
           if (state is SignupLoadedState) {
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => ProfileScreen()),
+                (Route<dynamic> route)=>false
             );
           }
           if (state is SignupErrorState) {
@@ -83,7 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         children: [
                           Text(
                             'Sign up',
-                            style: TextStyle(fontSize: 35, color: Colors.white),
+                            style: TextStyle(fontSize: 35, color: Colors.white,fontFamily: 'Abel'),
                           ),
                           const SizedBox(height: 80),
                           Padding(

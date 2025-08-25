@@ -2,14 +2,14 @@ import 'package:bookcycle/PostAuth/BookDetailPage/screen/book_details.dart';
 import 'package:bookcycle/PostAuth/Homepage/Model/bookModel.dart';
 import 'package:bookcycle/PostAuth/Homepage/bloc/homepage_bloc.dart';
 import 'package:bookcycle/PostAuth/Homepage/components/product_display_container.dart';
+import 'package:bookcycle/PostAuth/SearchPage/screen/search_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Homepage extends StatefulWidget {
-
-
   const Homepage({super.key});
 
   @override
@@ -17,51 +17,65 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-
   @override
   void initState() {
     context.read<HomepageBloc>().add(getHomepageDataEvent());
+
     super.initState();
   }
+
   List<BookModel>? recentBooks;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomepageBloc,HomepageState>(
-
-      builder: (context,state) {
-
-        if(state is HomepageErrorState)
-          {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('Unable to fetch data due to ${state.error}'),
-                    InkWell(onTap: (){
+    return BlocBuilder<HomepageBloc, HomepageState>(
+      builder: (context, state) {
+        if (state is HomepageErrorState) {
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('Unable to fetch data due to ${state.error}'),
+                  InkWell(
+                    onTap: () {
                       context.read<HomepageBloc>().add(getHomepageDataEvent());
-                    },child: Text('Reload',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.blue,),textAlign: TextAlign.center,))
-                  ],
-                ),
+                    },
+                    child: Text(
+                      'Reload',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
               ),
-            );
-          }
-        if(state is HomepageLoadingState)
-          {
-            return Center(child: CircularProgressIndicator.adaptive(backgroundColor: Colors.black,));
-          }
-        if(state is HomepageLoadedState)
-        {
-          recentBooks=state.data;
+            ),
+          );
+        }
+        if (state is HomepageLoadingState) {
+          return Center(
+            child: CircularProgressIndicator.adaptive(
+              backgroundColor: Colors.black,
+            ),
+          );
+        }
+        if (state is HomepageLoadedState) {
+          recentBooks = state.data;
           return SingleChildScrollView(
             child: Column(
               children: [
+                const SizedBox(height: 60),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchPage()));
+                    },
                     child: Container(
                       height: 40,
                       decoration: BoxDecoration(
@@ -72,11 +86,18 @@ class _HomepageState extends State<Homepage> {
                       child: Row(
                         children: [
                           const SizedBox(width: 15),
-                          Icon(CupertinoIcons.search, color: Colors.black, size: 16),
+                          Icon(
+                            CupertinoIcons.search,
+                            color: Colors.black,
+                            size: 16,
+                          ),
                           const SizedBox(width: 20),
                           Text(
                             'Search Book',
-                            style: TextStyle(color: Colors.black54, fontSize: 14),
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 14,
+                            ),
                           ),
                         ],
                       ),
@@ -85,26 +106,48 @@ class _HomepageState extends State<Homepage> {
                 ),
                 const SizedBox(height: 20),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.all(8.0),
                   child: ClipRRect(
-
                     borderRadius: BorderRadius.circular(15),
                     child: Stack(
-                        alignment: Alignment.center,
-                        children: [Image.asset('assets/images/gptbook.png',height: 150,width: double.maxFinite,
-                          fit: BoxFit.fitWidth,),
-                          Container(
-                            width: double.maxFinite,
-                            height: 150,
-                            color: Colors.black.withOpacity(0.3), // dark overlay
+                      alignment: Alignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/gptbook.png',
+                          height: 150,
+                          width: double.maxFinite,
+                          fit: BoxFit.fitWidth,
+                        ),
+                        Container(
+                          width: double.maxFinite,
+                          height: 150,
+                          color: Colors.black.withOpacity(0.3), // dark overlay
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'TOP ',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'fiction ',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'Gravitas',
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'books',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
                           ),
-                          RichText(text: TextSpan(
-                              children: [
-                                TextSpan(text: 'TOP ',style: TextStyle(fontSize: 20,color: Colors.white),),
-                                TextSpan(text: 'fiction ',style: TextStyle(fontSize: 20,fontFamily: 'Gravitas')),
-                                TextSpan(text: 'books',style: TextStyle(fontSize: 20,))
-                              ]
-                          ))]
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -114,18 +157,46 @@ class _HomepageState extends State<Homepage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text('TOP',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      Text(
+                        'TOP',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
                   height: 250,
-                  child: ListView.builder(scrollDirection: Axis.horizontal,shrinkWrap: true,itemCount: 5,itemBuilder: (context,index){
-                    return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: BookContainer(imagepath: 'images/book1.jpg', price: "200RS", title: "Fourty Rules of Love", location: "Gulistan-e-johar block 8 Karachi")
-                    );
-                  }),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: recentBooks?.length,
+                    itemBuilder: (context, index) {
+                      final item = recentBooks![index];
+
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookDetails(book: item),
+                              ),
+                            );
+                          },
+                          child: BookContainer(
+                            imagepath: item.imagepath,
+                            price: item.price,
+                            title: item.title,
+                            location: item.location,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
 
                 const SizedBox(height: 15),
@@ -134,34 +205,55 @@ class _HomepageState extends State<Homepage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text('Recently added',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      Text(
+                        'Recently added',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
                   height: 250,
-                  child: ListView.builder(scrollDirection: Axis.horizontal,shrinkWrap: true,itemCount: recentBooks?.length,itemBuilder: (context,index){
+                  child: ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 0),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: recentBooks?.length,
+                    itemBuilder: (context, index) {
+                      final item = recentBooks![index];
 
-                    final item=recentBooks![index];
-
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: GestureDetector(onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>BookDetails(book: item)));
-                      },child: BookContainer(imagepath: item.imagepath, price: item.price, title: item.title, location: item.location)),
-                    );
-                  }),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookDetails(book: item),
+                              ),
+                            );
+                          },
+                          child: BookContainer(
+                            imagepath: item.imagepath,
+                            price: item.price,
+                            title: item.title,
+                            location: item.location,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
           );
+        } else {
+          return Container();
         }
-        else
-          {
-            return Container();
-          }
-
-      }
+      },
     );
   }
 }

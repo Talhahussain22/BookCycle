@@ -1,9 +1,14 @@
 import 'package:bookcycle/Authentication/Login/bloc/login_bloc.dart';
+import 'package:bookcycle/Authentication/ResetPasswordPage/bloc/resetpassword_bloc.dart';
 import 'package:bookcycle/Authentication/SignUp/bloc/signup_bloc.dart';
 import 'package:bookcycle/Authentication/google_auth/bloc/google_auth_bloc.dart';
+import 'package:bookcycle/PostAuth/BookDetailPage/BookSoldorDeleteBloc/book_soldor_delete_bloc.dart';
 import 'package:bookcycle/PostAuth/BookDetailPage/bloc/book_detials_bloc.dart';
+import 'package:bookcycle/PostAuth/ChatPage/bloc/chat_bloc.dart';
 import 'package:bookcycle/PostAuth/Homepage/bloc/homepage_bloc.dart';
+import 'package:bookcycle/PostAuth/MyBooksPage/bloc/mybooksbloc_bloc.dart';
 import 'package:bookcycle/PostAuth/ProfilePage/bloc/profile_page_bloc.dart';
+import 'package:bookcycle/PostAuth/SearchPage/bloc/search_bloc.dart';
 import 'package:bookcycle/PostAuth/SellPage/bloc/sell_page_bloc.dart';
 import 'package:bookcycle/PostAuth/SellPage/locationbloc/location_bloc.dart';
 import 'package:bookcycle/ProfileScreen/bloc/profile_bloc.dart';
@@ -38,6 +43,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_)=>SignupBloc()),
@@ -48,7 +54,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_)=>LocationBloc()),
         BlocProvider(create: (_)=>SellPageBloc()),
         BlocProvider(create: (_)=>HomepageBloc()),
-        BlocProvider(create: (_)=>BookDetialsBloc())
+        BlocProvider(create: (_)=>BookDetialsBloc()),
+        BlocProvider(create: (_)=>ChatBloc()),
+        BlocProvider(create: (_)=>MybooksblocBloc()),
+        BlocProvider(create: (_)=>BookSoldorDeleteBloc()),
+        BlocProvider(create: (_)=>SearchBloc()),
+        BlocProvider(create: (_)=>ResetpasswordBloc())
       ],
       child: MaterialApp(
         title: 'Book Cycle',

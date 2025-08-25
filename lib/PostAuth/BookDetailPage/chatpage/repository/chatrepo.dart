@@ -12,6 +12,11 @@ class BookChatRepo {
   Future<DocumentReference> OpenorCreatechatDocument({
     required String bookid,
     required String sellerid,
+    required String bookimagepath,
+    required String booktitle,
+    required String ownername,
+    required String buyername,
+    required String bookprice
   }) async {
     String buyerid = firebaseauth.currentUser!.uid;
     String chatid = '${bookid}_${buyerid}_${sellerid}';
@@ -27,6 +32,11 @@ class BookChatRepo {
           buyerId: buyerid,
           sellerId: sellerid,
           participants: [buyerid, sellerid],
+          booktitle: booktitle,
+          bookimagepath: bookimagepath,
+          ownername: ownername,
+          buyername: buyername,
+          bookprice: bookprice
         ).toMap(),
       );
     }

@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class BookModel
-{
+class BookModel {
   String bookid;
   String imagepath;
   String condition;
@@ -14,10 +14,45 @@ class BookModel
   dynamic lat;
   dynamic lon;
   String status;
-  
-  BookModel({required this.bookid,required this.imagepath,required this.condition,required this.category,required this.language,required this.title,required this.description,required this.price,required this.location,required this.ownerid,required this.lat,required this.lon,required this.status});
-  
-  factory BookModel.fromJson(Map<String,dynamic> data){
-    return BookModel(bookid: data['bookid'],imagepath: data['imagepath'], condition: data['condition'], category: data['category'], language: data['language'], title: data['title'], description: data['description'], price: data['price'], location: data['address'], ownerid: data['ownerid'],lat: data['latitude'], lon: data['longitude'], status: data['status']);
+  Timestamp createdAt;
+  int views;
+
+  BookModel({
+    required this.bookid,
+    required this.imagepath,
+    required this.condition,
+    required this.category,
+    required this.language,
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.location,
+    required this.ownerid,
+    required this.lat,
+    required this.lon,
+    required this.status,
+    required this.createdAt,
+    required this.views
+  });
+
+  factory BookModel.fromJson(Map<String, dynamic> data) {
+
+    return BookModel(
+      bookid: data['bookid'],
+      imagepath: data['imagepath'],
+      condition: data['condition'],
+      category: data['category'],
+      language: data['language'],
+      title: data['title'],
+      description: data['description'],
+      price: data['price'],
+      location: data['address'],
+      ownerid: data['ownerid'],
+      lat: data['latitude'],
+      lon: data['longitude'],
+      status: data['status'],
+      createdAt: data['createdAt'],
+      views: data['views']
+    );
   }
 }

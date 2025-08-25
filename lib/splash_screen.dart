@@ -7,6 +7,7 @@ import 'package:bookcycle/PostAuth/Homepage/screen/Homepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -73,10 +74,9 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 5),
             Text(
-              'sell your books',
+              'sell your books faster',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white),
-            ),
+              style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: Colors.white,fontFamily: 'Pacifico'),),
             const SizedBox(height: 12),
             SizedBox(
               height: 200,

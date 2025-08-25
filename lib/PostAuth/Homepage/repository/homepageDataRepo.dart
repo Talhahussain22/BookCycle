@@ -11,7 +11,7 @@ class HompePageRepo
     List<BookModel> allBooks;
     try
         {
-          Query booksquery=firebaseFirestore.collection('books').orderBy('createdAt',descending: true).limit(10);
+          Query booksquery=firebaseFirestore.collection('books').where('status',isEqualTo: 'Active').orderBy('createdAt',descending: true).limit(10);
           QuerySnapshot data =await booksquery.get();
 
           allBooks=data.docs.map((doc)=>BookModel.fromJson(doc.data() as Map<String,dynamic>)).toList();
