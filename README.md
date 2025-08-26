@@ -33,6 +33,22 @@ Backend: Firebase Authentication, Firestore, Firebase Storage
 Other: Cached Network Images, Custom Email Templates for password reset
 
 📷 Screenshots
+![IMG-20250825-WA0009](https://github.com/user-attachments/assets/a40fb312-9c4e-47b7-a78c-b7ce39c11003)
+![IMG-20250825-WA0010](https://github.com/user-attachments/assets/c61ee7a7-d7d2-4ccb-b2f7-684359d34e7c)
+![IMG-20250825-WA0016](https://github.com/user-attachments/assets/9e4323db-64c7-4226-85ee-7de191b31539)
+![IMG-20250825-WA0015](https://github.com/user-attachments/assets/28a6db25-db75-4d2b-beb3-be7fa4be1e95)
+![IMG-20250825-WA0013](https://github.com/user-attachments/assets/5151dee8-c8cb-4b7d-aee8-cb0e851e9370)
+![IMG-20250825-WA0012](https://github.com/user-attachments/assets/bae2bd28-12e3-4540-ac10-72b72a2cbdbd)
+![IMG-20250825-WA0014](https://github.com/user-attachments/assets/af84b0b9-11e5-47e7-9c34-5278c3377eb5)
+![IMG-20250825-WA0012](https://github.com/user-attachments/assets/d324d81c-272e-414a-aed5-5f3002209209)
+
+
+
+
+
+
+
+
 
 ![IMG-20250825-WA0008](https://github.com/user-attachments/assets/5269d268-07b0-46f9-b259-5bdf49a80dd3)
 
