@@ -1,16 +1,42 @@
-# bookcycle
+📚 BookCycle
 
-A new Flutter project.
+A Flutter marketplace app to buy, sell, and exchange books with real-time chat between users.
 
-## Getting Started
+🚀 Overview
 
-This project is a starting point for a Flutter application.
+BookCycle is a mobile application built with Flutter and Firebase that allows users to seamlessly buy and sell books. The app features user authentication, book listings, search functionality, and a built-in chat system to connect buyers and sellers.
 
-A few resources to get you started if this is your first Flutter project:
+✨ Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+🔐 User Authentication – Secure sign up, login, and password reset with Firebase Auth
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+📖 Book Listings – Post, browse, and manage books with images, price, and status
+
+💬 Real-time Chat – In-app messaging between buyers and sellers
+
+🔎 Smart Search – Search books by title with instant results
+
+🔄 Pull-to-Refresh – Smooth refresh of listings and chat updates
+
+⚡ Cloud Firestore Integration – Optimized queries and scalable backend
+
+🎨 Modern UI/UX – Clean design with Bloc state management
+
+🛠️ Tech Stack
+
+Framework: Flutter
+
+State Management: Flutter Bloc
+
+Backend: Firebase Authentication, Firestore, Firebase Storage
+
+Other: Cached Network Images, Custom Email Templates for password reset
+
+📷 Screenshots
+
+![IMG-20250825-WA0008](https://github.com/user-attachments/assets/5269d268-07b0-46f9-b259-5bdf49a80dd3)
+
+
+💡 Use Case
+
+BookCycle is designed for book enthusiasts who want a simple way to exchange, buy, or sell books online while communicating directly with each other inside the app.
